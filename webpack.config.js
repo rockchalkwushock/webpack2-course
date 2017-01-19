@@ -43,7 +43,8 @@ module.exports = {
       // if there are duplicates pull them and ONLY put them
       // in the vendor.js.
       // manifest.js will let browser know if vendor actually
-      // changed
+      // changed as it will be the first compilation of our
+      // VENDOR_LIBS.
       names: ['vendor', 'manifest']
     }),
     new HtmlWebpackPlugin({
