@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run clean && webpack",
+    "build": "NODE_ENV=production npm run clean && webpack -p",
     "clean": "rimraf dist",
     "serve": "webpack-dev-server"
   },
@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.14.0",
     "faker": "^3.1.0",
     "lodash": "^4.17.2",
     "react": "^15.4.1",
@@ -33,6 +34,7 @@
     "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
     "webpack": "2.2.0-rc.0",
+    "webpack-dev-middleware": "^1.9.0",
     "webpack-dev-server": "^2.2.0-rc.0"
   }
 }

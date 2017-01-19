@@ -53,6 +53,9 @@ module.exports = {
       // IF index.html has specifics already set then use
       // as a template for the plugin.
       template: 'src/index.html'
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     })
   ]
 };
