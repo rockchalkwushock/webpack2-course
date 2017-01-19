@@ -1,10 +1,24 @@
 const express = require('express');
-const webpackMiddleware = require('webpack-dev-middleware');
-const webpack = require('webpack');
-const webpackConfig = require('./webpack.config');
+const path = require('path');
 
 const app = express();
 
-app.use(webpackMiddleware(webpack(webpackConfig)));
+// Sever routes...
+// ALL THIS SHOULD BE BEFORE WEBPACK!!!
 
-app.listen(3050, () => console.log('Listening'));
+if (process.env.NODE_ENV !== 'production') {
+  // Only want webpack to be called when not in 'production'.
+  const webpackMiddleware = require('webpack-dev-middleware');
+  const webpack = require('webpack');
+  const webpackConfig = require('./webpack.config');
+  app.use(webpackMiddleware(webpack(webpackConfig)));
+} else {
+  app.use(express.static('dist'));
+  // This piece of code makes browserHistory work properly
+  // for react-router.
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist/index.html'));
+  });
+}
+
+app.listen(process.env.PORT || 3050, () => console.log('Listening'));
